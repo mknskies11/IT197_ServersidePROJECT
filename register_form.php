@@ -10,13 +10,13 @@ if(isset($_POST['submit'])){
    $cpass = md5($_POST['cpassword']);
    $user_type = $_POST['user_type'];
 
-   $select = " SELECT * FROM user_form WHERE email = '$email' ";
+   $select = "SELECT * FROM user_form WHERE email = '$email'";
 
    $result = mysqli_query($conn, $select);
 
    if(mysqli_num_rows($result) > 0){
 
-      $error[] = 'user already exist!';
+      $error[] = 'User already exists!';
 
    }else{
 
@@ -25,12 +25,16 @@ if(isset($_POST['submit'])){
       }else{
          $insert = "INSERT INTO user_form(name, email, password, user_type) VALUES('$name','$email','$pass','$user_type')";
          mysqli_query($conn, $insert);
-         header('location:login_form.php');
+
+         // Show a success alert
+         echo "<script>alert('Registration success!');</script>";
+
+         // Redirect to the login page
+         echo "<script>window.location.href = 'login_form.php';</script>";
       }
    }
 
 };
-
 
 ?>
 
